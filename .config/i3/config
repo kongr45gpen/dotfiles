@@ -193,7 +193,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command /home/kongr45gpen/repos/bumblebee-status/bumblebee-status -m layout mocp nic disk:root sensors cpu memory brightness battery pasink datetime -p root.path=/ datetime.format="CW %V %a, %b %d %Y %H:%M:%S" -t solarized-powerline
-        tray_output LVDS1
+        tray_output primary
 }
 
 # Screenshot
