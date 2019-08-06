@@ -122,4 +122,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Some custom aliases
+n() {
+    nohup $@ > /dev/null 2>&1 &
+}
+
 [ -s "/home/kongr45gpen/.scm_breeze/scm_breeze.sh" ] && source "/home/kongr45gpen/.scm_breeze/scm_breeze.sh"
