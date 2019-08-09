@@ -17,11 +17,8 @@ exec --no-startup-id /usr/bin/compton --config ~/.compton.conf
 # Wallpaper
 exec --no-startup-id feh --bg-fill ~/esabg/fys_now.jpg --reload 1800
 
-exec --no-startup-id setxkbmap -option 'grp:alt_shift_toggle'
-exec --no-startup-id setxkbmap -layout us,el
-
-# Polybar
-# exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec setxkbmap -option 'grp:alt_shift_toggle'
+exec setxkbmap -layout us,el
 
 # Brightness keybindings
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 -time 100 # increase screen brightness
