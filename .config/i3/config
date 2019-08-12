@@ -17,7 +17,7 @@ exec --no-startup-id /usr/bin/compton --config ~/.compton.conf
 # Wallpaper
 exec --no-startup-id feh --bg-fill ~/esabg/fys_now.jpg --reload 1800
 
-exec setxkbmap -option 'grp:alt_shift_toggle' -layout us,el
+exec --no-startup-id setxkbmap -option 'grp:alt_shift_toggle' -layout us,el
 
 # Brightness keybindings
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 -time 100 # increase screen brightness
@@ -130,8 +130,8 @@ bindsym $mod+a focus parent
 
 # switch to workspace
 bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
+bindsym $mod+2 workspace 2: terminal
+bindsym $mod+3 workspace 3: docs
 bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
@@ -142,8 +142,8 @@ bindsym $mod+0 workspace 10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+2 move container to workspace 2: terminal
+bindsym $mod+Shift+3 move container to workspace 3: docs
 bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
@@ -198,6 +198,9 @@ bar {
         tray_output primary
 }
 
+# Borders
+hide_edge_borders smart
+
 # Screenshot
 bindsym Print exec spectacle
 bindsym $mod+Print exec spectacle -r
@@ -208,3 +211,18 @@ for_window [class="FlyingToasters"] fullscreen enable global
 
 bindsym $mod+q exec ~/repos/i3lock-blur/lock.sh
 bindsym $mod+t exec "/usr/lib/xscreensaver/flyingtoasters"
+
+
+# Workspace specific stuff
+# workspace_layout tabbed
+exec --no-startup-id "i3-msg 'workspace 2: terminal; append_layout /home/kongr45gpen/.config/i3/console.json'"
+exec "i3-sensible-terminal"
+exec "i3-sensible-terminal"
+exec "i3-sensible-terminal -e mosh helit.org"
+
+# Okular goes to workspace 3
+assign [class="okular"] docs
+
+
+# Focus specific windows
+bindsym $mod+Escape [class="(?i)firefox"] focus
