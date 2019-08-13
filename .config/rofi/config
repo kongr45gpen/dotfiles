@@ -1,0 +1,5 @@
+rofi.combi-modi:    window,drun,run
+rofi.theme:         Arc-Dark
+rofi.font:          hack 10
+rofi.modi:          combi
+
