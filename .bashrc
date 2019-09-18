@@ -127,6 +127,8 @@ n() {
     nohup "$@" > /dev/null 2>&1 &
 }
 
+alias no="n okular"
+
 [ -s "/home/kongr45gpen/.scm_breeze/scm_breeze.sh" ] && source "/home/kongr45gpen/.scm_breeze/scm_breeze.sh"
 
 export NVM_DIR="$HOME/.nvm"
