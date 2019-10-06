@@ -151,6 +151,8 @@ catch
 endtry
 
 set background=dark
+hi QuickFixLine cterm=NONE ctermfg=black ctermbg=green
+hi Search cterm=NONE ctermfg=black ctermbg=blue
 
 " Set extra options when running in GUI mode
 if has("gui_running")
