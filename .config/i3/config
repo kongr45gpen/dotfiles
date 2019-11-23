@@ -165,6 +165,10 @@ bindsym $mod+KP_Right move workspace to output right
 bindsym $mod+KP_Left move workspace to output left
 bindsym $mod+KP_Up move workspace to output up
 bindsym $mod+KP_Down move workspace to output down
+bindsym $mod+Mod2+KP_6 move workspace to output right
+bindsym $mod+Mod2+KP_4 move workspace to output left
+bindsym $mod+Mod2+KP_8 move workspace to output up
+bindsym $mod+Mod2+KP_2 move workspace to output down
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
