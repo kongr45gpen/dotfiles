@@ -142,8 +142,8 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1  "1"
-set $ws2  "2: terminal"
+set $ws1  "1  "
+set $ws2  "2:  term"
 set $ws3  "3: docs"
 set $ws4  "4: code"
 set $ws5  "5"
@@ -153,6 +153,7 @@ set $ws8  "8"
 set $ws9  "9"
 set $ws10 "10"
 set $ws11 "~"
+set $wsmail " email"
 set $wsmm "[T]mattermost"
 set $wsdisc "[c]discord"
 
@@ -168,9 +169,9 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
-bindsym $mod+m workspace email
+bindsym $mod+m workspace $wsmail
 bindsym $mod+Tab workspace $wsmm
-bindsym $mod+c workspace $wsdisc
+bindsym $mod+Escape workspace $wsdisc
 
 # move focused container to workspace
 bindsym $mod+Shift+grave move container to workspace $ws11
@@ -184,9 +185,9 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
-bindsym $mod+Shift+m move container to workspace email
+bindsym $mod+Shift+m move container to workspace $wsmail
 bindsym $mod+Shift+Tab move container to workspace $wsmm
-bindsym $mod+Shift+c move container to workspace $wsdisc
+bindsym $mod+Shift+Escape move container to workspace $wsdisc
 
 # move focused container to other screen
 bindsym $mod+KP_Right move workspace to output right
@@ -318,13 +319,13 @@ exec "discord"
 
 # Specific workspaces for specific windows
 assign [class="okular"] $ws3
-assign [class="(?i)thunderbird"] email
+assign [class="(?i)thunderbird"] $wsmail
 assign [class="(?i)Code"] $ws4
 assign [class="(?i)Discord"] $wsdisc
 assign [title="mm.asat.gr"] $wsmm
 
 # Focus specific windows
-bindsym $mod+Escape [class="(?i)firefox"] focus
+# bindsym $mod+Escape [class="(?i)firefox"] focus
 
 # Disable borders (temporary?)
 for_window [class="^.*"] border pixel 2
