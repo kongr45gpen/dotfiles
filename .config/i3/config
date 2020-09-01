@@ -19,6 +19,7 @@ exec --no-startup-id /usr/bin/compton --config ~/.compton.conf
 exec --no-startup-id feh --bg-fill ~/Pictures/Stone_Flower.jpg
 
 exec --no-startup-id setxkbmap -option 'grp:alt_shift_toggle' -layout us,el
+exec --no-startup-id kcminit
 
 # Brightness keybindings
 bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10 # increase screen brightness
@@ -28,9 +29,9 @@ bindsym XF86MonBrightnessDown exec --no-startup-id light -T 0.8 # decrease scree
 #bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 #bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 #bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
-bindsym XF86AudioMute exec amixer -q set Master toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # Gaps
 #gaps inner 0
@@ -96,9 +97,9 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
+#bindsym $mod+Shift+j move left
+#bindsym $mod+Shift+k move down
+#bindsym $mod+Shift+l move up
 bindsym $mod+Shift+colon move right
 
 # alternatively, you can use the cursor keys:
@@ -152,6 +153,8 @@ set $ws8  "8"
 set $ws9  "9"
 set $ws10 "10"
 set $ws11 "~"
+set $wsmm "[T]mattermost"
+set $wsdisc "[c]discord"
 
 # switch to workspace
 bindsym $mod+grave workspace $ws11
@@ -166,6 +169,8 @@ bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
 bindsym $mod+m workspace email
+bindsym $mod+Tab workspace $wsmm
+bindsym $mod+c workspace $wsdisc
 
 # move focused container to workspace
 bindsym $mod+Shift+grave move container to workspace $ws11
@@ -180,6 +185,8 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 bindsym $mod+Shift+m move container to workspace email
+bindsym $mod+Shift+Tab move container to workspace $wsmm
+bindsym $mod+Shift+c move container to workspace $wsdisc
 
 # move focused container to other screen
 bindsym $mod+KP_Right move workspace to output right
@@ -192,11 +199,14 @@ bindsym $mod+Mod2+KP_8 move workspace to output up
 bindsym $mod+Mod2+KP_2 move workspace to output down
 
 # xrandr commands
+bindsym $mod+Shift+j exec "xrandr --output DP-1 --auto --right-of eDP-1"
 bindsym $mod+Shift+h exec "xrandr --output HDMI-1 --auto --right-of eDP-1"
-bindsym $mod+Shift+g exec "xrandr --output HDMI-1 --off"
+bindsym $mod+Shift+g exec "xrandr --output HDMI-1 --off --output DP-1 --off --output eDP-1 --auto"
+bindsym $mod+Shift+Ctrl+g exec "xrandr --output eDP-1 --auto --output DP-1 --auto --right-of eDP-1 --output HDMI-1 --auto --right-of DP-1"
+bindsym $mod+Shift+Ctrl+h exec "xrandr --output eDP-1 --off --output DP-1 --auto --output HDMI-1 --auto --right-of DP-1"
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+Ctrl+r reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
@@ -301,13 +311,17 @@ workspace_auto_back_and_forth yes
 exec --no-startup-id "i3-msg 'workspace 2: terminal; append_layout /home/kongr45gpen/.config/i3/console.json'"
 exec "i3-sensible-terminal"
 exec "i3-sensible-terminal"
-exec "i3-sensible-terminal -e mosh helit.org"
+exec "i3-sensible-terminal"
 exec "thunderbird"
+exec "firefox --ssb https://mm.asat.gr"
+exec "discord"
 
 # Specific workspaces for specific windows
 assign [class="okular"] $ws3
 assign [class="(?i)thunderbird"] email
 assign [class="(?i)Code"] $ws4
+assign [class="(?i)Discord"] $wsdisc
+assign [title="mm.asat.gr"] $wsmm
 
 # Focus specific windows
 bindsym $mod+Escape [class="(?i)firefox"] focus
