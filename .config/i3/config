@@ -16,9 +16,10 @@ exec --no-startup-id /usr/bin/compton --config ~/.compton.conf
 
 # Wallpaper
 #exec --no-startup-id feh --bg-fill ~/esabg/fys_now.jpg --reload 1800
-exec --no-startup-id feh --bg-fill ~/Pictures/Stone_Flower.jpg
+exec --no-startup-id feh --bg-fill ~/Pictures/Hayabusa2_Ion_thruster.jpg
 
-exec --no-startup-id setxkbmap -option 'grp:alt_shift_toggle' -layout us,el
+# Note; You don't need this line! Set the defaults in /etc/default/keyboard
+#exec --no-startup-id setxkbmap -option 'grp:alt_shift_toggle' -layout us,el
 exec --no-startup-id kcminit
 
 # Brightness keybindings
@@ -137,7 +138,7 @@ bindsym $mod+BackSpace border toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
-# focus the child container
+# focus the child contai3ner
 #bindsym $mod+d focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
@@ -202,9 +203,10 @@ bindsym $mod+Mod2+KP_2 move workspace to output down
 # xrandr commands
 bindsym $mod+Shift+j exec "xrandr --output DP-1 --auto --right-of eDP-1"
 bindsym $mod+Shift+h exec "xrandr --output HDMI-1 --auto --right-of eDP-1"
-bindsym $mod+Shift+g exec "xrandr --output HDMI-1 --off --output DP-1 --off --output eDP-1 --auto"
-bindsym $mod+Shift+Ctrl+g exec "xrandr --output eDP-1 --auto --output DP-1 --auto --right-of eDP-1 --output HDMI-1 --auto --right-of DP-1"
-bindsym $mod+Shift+Ctrl+h exec "xrandr --output eDP-1 --off --output DP-1 --auto --output HDMI-1 --auto --right-of DP-1"
+bindsym $mod+Shift+g exec "xrandr --output HDMI-1 --off --output DP-1 --off --output eDP-1 --auto --primary"
+bindsym $mod+Shift+Ctrl+g exec "xrandr --output eDP-1 --auto --output DP-1 --auto --right-of eDP-1 --output HDMI-1 --primary --auto --right-of DP-1"
+bindsym $mod+Shift+Ctrl+h exec "xrandr --output eDP-1 --off --output DP-1 --auto --output HDMI-1 --primary --auto --right-of DP-1"
+bindsym $mod+Shift+Ctrl+j exec "xrandr --output eDP-1 --primary --auto --output DP-1 --auto --right-of eDP-1 --output HDMI-1 --off"
 
 # reload the configuration file
 bindsym $mod+Shift+Ctrl+r reload
@@ -275,7 +277,7 @@ set $urgent-bg-color     #E53935
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command /home/kongr45gpen/repos/bumblebee-status/bumblebee-status -m spaceapi nic disk:root sensors cpu memory brightness battery pasink dunst datetimetz datetime -p nic.states=^down -p root.path=/ datetimetz.timezone="America/New_York" datetime.format="%a, %b %d %Y %H:%M:%S" datetimetz.format="%H:%M ET" spaceapi.url="http://localhost/space.php" spaceapi.format="⚗️ %%state.open%open%closed%% (%%ext_people.count%%)" datetime.left-click="gsimplecal" -t solarized-powerline
+        status_command /home/kongr45gpen/repos/bumblebee-status/bumblebee-status -m taskwarrior timewarrior nic disk:root sensors cpu memory brightness battery pasink dunst datetimetz datetime -p nic.states=^down -p root.path=/ datetimetz.timezone="America/New_York" datetime.format="%a, %b %d %Y %H:%M:%S" datetimetz.format="%H:%M ET" spaceapi.url="http://localhost/space.php" spaceapi.format="⚗️ %%state.open%open%closed%% (%%ext_people.count%%)" datetime.left-click="gsimplecal" -t solarized-powerline
         tray_output primary
         font pango:DejaVu Sans Mono 8
         colors {
@@ -309,7 +311,7 @@ workspace_auto_back_and_forth yes
 
 
 # workspace_layout tabbed
-exec --no-startup-id "i3-msg 'workspace 2: terminal; append_layout /home/kongr45gpen/.config/i3/console.json'"
+exec --no-startup-id 'i3-msg workspace $ws2; append_layout /home/kongr45gpen/.config/i3/console.json'
 exec "i3-sensible-terminal"
 exec "i3-sensible-terminal"
 exec "i3-sensible-terminal"

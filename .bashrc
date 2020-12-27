@@ -137,6 +137,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.nodenv/bin:$PATH"
+export PATH="$HOME/.symfony/bin:$PATH"
+
+# Set how many times we need to press Ctrl+D to exit shell
+if shopt -q login_shell; then IGNOREEOF=10; else IGNOREEOF=5; fi
 
 # Eternal bash history.
 # ---------------------
@@ -153,3 +157,5 @@ export HISTFILE=~/.bash_eternal_history
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 source ~/.fonts/*.sh
+alias mon2cam="deno run --unstable -A -r -q https://raw.githubusercontent.com/ShayBox/Mon2Cam/master/src/mod.ts"
+alias mon2cam="deno run --unstable -A -r -q https://raw.githubusercontent.com/ShayBox/Mon2Cam/master/src/mod.ts"
