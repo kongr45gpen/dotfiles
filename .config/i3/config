@@ -33,6 +33,10 @@ bindsym XF86MonBrightnessDown exec --no-startup-id light -T 0.8 # decrease scree
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioPlay exec "playerctl play-pause"
+bindsym XF86AudioNext exec "playerctl next"
+bindsym XF86AudioPrev exec "playerctl previous"
+bindsym XF86AudioStop exec "playerctl stop"
 
 # Gaps
 #gaps inner 0
@@ -122,7 +126,7 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+shift+f        fullscreen toggle global
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+bindsym $mod+s sticky toggle
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -154,6 +158,8 @@ set $ws8  "8"
 set $ws9  "9"
 set $ws10 "10"
 set $ws11 "~"
+set $ws12 "q"
+set $ws13 "y"
 set $wsmail " email"
 set $wsmm "[T]mattermost"
 set $wsdisc "[c]discord"
@@ -170,6 +176,8 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
+bindsym $mod+q workspace $ws12
+bindsym $mod+y workspace $ws13
 bindsym $mod+m workspace $wsmail
 bindsym $mod+Tab workspace $wsmm
 bindsym $mod+Escape workspace $wsdisc
@@ -186,6 +194,8 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
+bindsym $mod+Shift+a move container to workspace $ws12
+bindsym $mod+Shift+y move container to workspace $ws13
 bindsym $mod+Shift+m move container to workspace $wsmail
 bindsym $mod+Shift+Tab move container to workspace $wsmm
 bindsym $mod+Shift+Escape move container to workspace $wsdisc
@@ -277,7 +287,7 @@ set $urgent-bg-color     #E53935
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command /home/kongr45gpen/repos/bumblebee-status/bumblebee-status -m taskwarrior timewarrior nic disk:root sensors cpu memory brightness battery pasink dunst datetimetz datetime -p nic.states=^down -p root.path=/ datetimetz.timezone="America/New_York" datetime.format="%a, %b %d %Y %H:%M:%S" datetimetz.format="%H:%M ET" spaceapi.url="http://localhost/space.php" spaceapi.format="⚗️ %%state.open%open%closed%% (%%ext_people.count%%)" datetime.left-click="gsimplecal" -t solarized-powerline
+        status_command /home/kongr45gpen/repos/bumblebee-status/bumblebee-status -m playerctl nic sensors cpu memory brightness battery pasink dunst datetimetz datetime -p nic.states=^down -p root.path=/ datetimetz.timezone="America/New_York" datetime.format="%a, %b %d %Y %H:%M:%S" datetimetz.format="%H:%M ET" spaceapi.url="http://localhost/space.php" spaceapi.format="⚗️ %%state.open%open%closed%% (%%ext_people.count%%)" datetime.left-click="gsimplecal" playerctl.format="{title:10.10}" pasink.limit=150 pasink.showbars=1  -t solarized-powerline
         tray_output primary
         font pango:DejaVu Sans Mono 8
         colors {
@@ -298,11 +308,14 @@ hide_edge_borders smart
 bindsym Print exec spectacle
 bindsym $mod+Print exec spectacle -r
 
+# Kill window when middle clicking on its title
+bindsym --release button2 kill
+
 # The classes
 for_window [class="flyingtoasters"] fullscreen enable global
 for_window [class="FlyingToasters"] fullscreen enable global
 
-bindsym $mod+q exec ~/.config/i3/lock.sh
+bindsym $mod+p exec ~/.config/i3/lock.sh
 bindsym $mod+t exec "/usr/lib/xscreensaver/flyingtoasters"
 
 
@@ -312,19 +325,25 @@ workspace_auto_back_and_forth yes
 
 # workspace_layout tabbed
 exec --no-startup-id 'i3-msg workspace $ws2; append_layout /home/kongr45gpen/.config/i3/console.json'
-exec "i3-sensible-terminal"
-exec "i3-sensible-terminal"
-exec "i3-sensible-terminal"
+#exec "i3-sensible-terminal"
+#exec "i3-sensible-terminal"
+#exec "i3-sensible-terminal"
 exec "thunderbird"
-exec "firefox --ssb https://mm.asat.gr"
-exec "discord"
+exec "firefox"
+exec "discord-canary"
 
 # Specific workspaces for specific windows
 assign [class="okular"] $ws3
 assign [class="(?i)thunderbird"] $wsmail
 assign [class="(?i)Code"] $ws4
 assign [class="(?i)Discord"] $wsdisc
-assign [title="mm.asat.gr"] $wsmm
+assign [title="mm.spacedot.gr"] $wsmm
+assign [title="Radiation Testing Board Interface"] $ws11
+assign [class="zoom"] $ws10
+assign [class="(?i)Dolphin"] $ws5
+assign [class="feh"] $ws5
+assign [class="eog"] $ws5
+assign [class="gwenview"] $ws5
 
 # Focus specific windows
 # bindsym $mod+Escape [class="(?i)firefox"] focus
